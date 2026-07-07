@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,5 +61,17 @@ public class CustomerController {
         return null;
     }
 
+    @DeleteMapping("/clientes/{id}")
+    public Customer deleteCliente(@PathVariable int id ){
+        for (Customer c : customers){
+            if (c.getID() == id){
+                customers.remove(c);
+                return c;
+            }
+        }
+        return null;
+    }
 }
+
+
 
