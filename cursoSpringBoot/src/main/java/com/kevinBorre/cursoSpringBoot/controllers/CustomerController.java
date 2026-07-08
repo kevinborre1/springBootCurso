@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -68,6 +69,27 @@ public class CustomerController {
                 customers.remove(c);
                 return c;
             }
+        }
+        return null;
+    }
+
+    @PatchMapping("/clientes")
+    public Customer patchCliente(@RequestBody Customer customer){
+        for (Customer c : customers){
+            if (c.getID() == customer.getID()){
+
+                if (customer.getName() != null){
+                    c.setName(customer.getName());
+                }
+                if (customer.getUsername() != null){
+                    c.setUsername(customer.getUsername());
+                }
+                if (customer.getPassword() != null){
+                    c.setPassword(customer.getPassword());
+                }
+                return c;
+            }
+
         }
         return null;
     }
