@@ -16,7 +16,7 @@ import com.kevinBorre.cursoSpringBoot.domain.Customer;
 @RequestMapping("/clientes")
 public class CustomerController {
 
-    private List<Customer> customers = new ArrayList<>(Arrays.asList(
+    private final List<Customer> customers = new ArrayList<>(Arrays.asList(
         
         new Customer(123, "Kevin Borre", "kevincho", "password123"),
         new Customer(456, "Jane Smith", "janesmith", "password456"),
