@@ -63,11 +63,11 @@ public class CustomerController {
                 c.setUsername(customer.getUsername());
                 c.setPassword(customer.getPassword());
                 
-                return ResponseEntity.ok("Cliente actualizado correctamente: " + customer.getUsername());
+                return ResponseEntity.noContent().build();
             
             }   
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado: " + customer.getUsername());
+        return ResponseEntity.notFound().build();
     }
 
     @RequestMapping (value = "/{id}", method = RequestMethod.DELETE)
@@ -76,10 +76,10 @@ public class CustomerController {
         for (Customer c : customers){
             if (c.getID() == id){
                 customers.remove(c);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cliente eliminado correctamente" + c.getID());
+                return ResponseEntity.noContent().build();
             }
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado: " + id);
+        return ResponseEntity.notFound().build();
     }
 
     @RequestMapping (method = RequestMethod.PATCH)
