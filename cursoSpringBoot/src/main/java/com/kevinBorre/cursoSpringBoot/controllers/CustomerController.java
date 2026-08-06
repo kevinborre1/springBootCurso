@@ -1,5 +1,6 @@
 package com.kevinBorre.cursoSpringBoot.controllers;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kevinBorre.cursoSpringBoot.domain.Customer;
 
@@ -50,8 +52,12 @@ public class CustomerController {
     //@PostMapping()
     public ResponseEntity<?> postCliente(@RequestBody Customer customer){
         customers.add(customer);
-        return ResponseEntity.status(HttpStatus.CREATED).body("CLiente creado correctamente: " + customer.getUsername());
-        //return customer;
+        URI location = ServletUriComponentsBuilder.
+        fromCurrentRequest().
+        path("/{username}").buildAndExpand(customer.getUsername()).toUri();
+
+        //return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(customer);
     }
 
     @RequestMapping (method = RequestMethod.PUT)
